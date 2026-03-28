@@ -53,12 +53,12 @@
 name: ClawCloud 自动登录保活
 
 on:
-  workflow_dispatch:      # 允许手动触发
+  workflow_dispatch:
   schedule:
-    - cron: '0 7 */5 * *'  # UTC 7:00，每5天运行一次
+    - cron: '0 7 */5 * *'  # UTC 7:00，每5天运行
 
 permissions:
-  contents: write         # 允许写入仓库（防止60天禁用用）
+  contents: write
 
 jobs:
   auto-login:
@@ -81,7 +81,14 @@ jobs:
           playwright install-deps
 
       - name: 运行自动登录
-        # ... 原有步骤保持不变
+        env:
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_PASSWORD: ${{ secrets.GH_PASSWORD }}
+          GH_SESSION: ${{ secrets.GH_SESSION }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: python scripts/auto_login.py
 
       - name: 保持仓库活跃
         run: |
@@ -89,7 +96,7 @@ jobs:
           git config user.name "GitHub Action"
           echo "last run: $(date)" > last_run.txt
           git add last_run.txt
-          git commit -m "chore: keep alive $(date +%Y-%m-%d)"
+          git commit -m "chore: keep alive $(date +%Y-%m-%d)" || echo "nothing to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
