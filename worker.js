@@ -1,8 +1,8 @@
-const BOT_TOKEN = '';
-const GITHUB_TOKEN = '';
-const REPO_OWNER = 'nyn-1670';
-const REPO_NAME = 'ClawCloud-Run';
-const ALLOWED_CHAT_ID = ;
+const BOT_TOKEN = ''; // 你的 Telegram Bot Token
+const GITHUB_TOKEN = ''; // 你的 GitHub Token
+const REPO_OWNER = 'nyn-1670'; // 你的 GitHub 用户名
+const REPO_NAME = 'ClawCloud-Run'; // 你的 GitHub 项目名
+const ALLOWED_CHAT_ID = ; // 纯数字，不加引号
 
 export default {
   async fetch(request) {
@@ -32,7 +32,7 @@ export default {
 
     if (text === '/run') {
       const res = await fetch(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/keep-alive.yml/dispatches`,
+        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/keep-alive.yml/dispatches`, // keep-alive.yml需要与github工作流文件名称一致
         {
           method: 'POST',
           headers: {
