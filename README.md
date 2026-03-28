@@ -1,0 +1,2 @@
+# claw-TG
+本项目由AI编写，适配于clawcloudRUN自动登录脚本。借用cloudflare的workers可以通过telegram远程进行action.
