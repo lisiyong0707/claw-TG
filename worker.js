@@ -1,7 +1,7 @@
 const BOT_TOKEN = ''; // 你的 Telegram Bot Token
 const GITHUB_TOKEN = ''; // 你的 GitHub Token
-const REPO_OWNER = 'nyn-1670'; // 你的 GitHub 用户名
-const REPO_NAME = 'ClawCloud-Run'; // 你的 GitHub 项目名
+const REPO_OWNER = 'lisiyong0707'; // 你的 GitHub 用户名
+const REPO_NAME = 'ClawCloud-Run'; // 你的 GitHub 项目名注意大小写
 const ALLOWED_CHAT_ID = ; // 纯数字，不加引号
 
 export default {
