@@ -235,15 +235,14 @@ export default {
 
 ### GITHUB_TOKEN — GitHub Personal Access Token
 
-登录 GitHub → 右上角头像 → Settings
-左侧最底部 → Developer settings
-Personal access tokens → Fine-grained tokens → Generate new token
-
-点击 + Add permissions，然后：
-在列表里找到 Actions
-权限只勾选：右侧下拉选择 Read and write
-点击确认
-生成后立刻复制，只显示一次
+- 登录 GitHub → 右上角头像 → Settings
+- 左侧最底部 → Developer settings
+- Personal access tokens → Fine-grained tokens → Generate new token
+- 点击 + Add permissions，然后：
+- 在列表里找到 Actions
+- 权限只勾选：右侧下拉选择 Read and write
+- 点击确认
+- 生成后立刻复制，只显示一次
 
 ### 绑定 Webhook
 
