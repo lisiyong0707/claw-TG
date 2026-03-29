@@ -231,6 +231,19 @@ export default {
 }
 ```
 
+
+
+### GITHUB_TOKEN — GitHub Personal Access Token
+
+登录 GitHub → 右上角头像 → Settings
+左侧最底部 → Developer settings
+Personal access tokens → Fine-grained tokens → Generate new token
+权限只勾选：
+
+Repository access：选你的仓库
+Actions → Read and Write
+生成后立刻复制，只显示一次
+
 ### 绑定 Webhook
 
 部署完成后，在浏览器地址栏输入（不要发给任何人）：
