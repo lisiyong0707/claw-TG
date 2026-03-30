@@ -49,6 +49,62 @@
 
 编辑仓库中的 `.github/workflows/keep-alive.yml`：
 
+
+
+```yaml
+name: ClawCloud 自动登录保活
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 1'  # UTC 2:00，每周一运行
+
+permissions:
+  contents: write
+
+jobs:
+  auto-login:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6  # 已升级至 v6 (支持 Node 24)
+
+      - name: 设置 Python
+        uses: actions/setup-python@v6  # 已升级至 v6 (支持 Node 24)
+        with:
+          python-version: '3.12'  # 建议升级到 3.12 配合最新的 Actions
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright requests pynacl
+          playwright install chromium
+          playwright install-deps
+
+      - name: 运行自动登录
+        env:
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
+          GH_PASSWORD: ${{ secrets.GH_PASSWORD }}
+          GH_SESSION: ${{ secrets.GH_SESSION }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: python scripts/auto_login.py
+
+      - name: 保持仓库活跃
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          echo "last run: $(date)" > last_run.txt
+          git add last_run.txt
+          git commit -m "chore: keep alive $(date +%Y-%m-%d)" || echo "nothing to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+```
 ```yaml
 name: ClawCloud 自动登录保活
 
